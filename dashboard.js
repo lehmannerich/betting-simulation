@@ -61,25 +61,37 @@ Vue.createApp({
   data() {
     return {
       runs: [],
+      results: [],
       investment: 10000,
-      repeat: 5,
+      roi: 100000,
+      repeat: 1,
+
+      winners: 0,
+      losers: 0,
+      bank: 0
     };
   },
   methods: {
     sim() {
+
       let t = 0.5;
       var r = Math.random();
+      if (r > t) { this.results.push({result: true}); this.winners++; this.bank = this.bank + this.roi}
+      else { this.results.push({result: false}); this.losers++; this.bank = this.bank - this.investment}
       
       this.runs.push(
-        { id: id++, 
+        { id: id++,
           investment: this.investment,
-          outcome: true
-        })
+        });
+
     },
     reset() {
       this.runs = [];
-      this.outcomes = [];
+      this.results = [];
       id = 1;
+      this.winners = 0;
+      this.losers = 0;
+      this.bank = 0;
     },
     run() {
       for (let i = 0; i < this.repeat; i++) {
