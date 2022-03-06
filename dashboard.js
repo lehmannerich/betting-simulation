@@ -53,3 +53,49 @@
     }
   })
 })()
+
+
+let id = 1;
+
+Vue.createApp({
+  data() {
+    return {
+      runs: [],
+      investment: 10000,
+      repeat: 5,
+    };
+  },
+  methods: {
+    sim() {
+      let t = 0.5;
+      var r = Math.random();
+      
+      this.runs.push(
+        { id: id++, 
+          investment: this.investment,
+          outcome: true
+        })
+    },
+    reset() {
+      this.runs = [];
+      this.outcomes = [];
+      id = 1;
+    },
+    run() {
+      for (let i = 0; i < this.repeat; i++) {
+        this.sim();
+      }
+    }
+  }
+}).mount("#app");
+
+
+
+
+
+
+
+
+
+
+
