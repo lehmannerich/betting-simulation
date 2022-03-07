@@ -51,6 +51,11 @@ Vue.createApp({
       }
     },
 
+    //I will try to split this in two.
+    //I will put the variable outside the Vue App.
+    //I will put the chart creation into mounted or leave it here, but I'll remove the data.
+    //Then I will trigger the chart.update function to make updates to the charts data.
+
     createChart() {
       var ctx = document.getElementById('myChart');
       var myChart = new Chart(ctx, {
