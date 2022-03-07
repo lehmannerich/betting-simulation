@@ -4,6 +4,7 @@
 let id = 1;
 
 Vue.createApp({
+
   data() {
     return {
       runs: [],
@@ -17,7 +18,9 @@ Vue.createApp({
       bank: 0
     };
   },
+
   methods: {
+
     sim() {
 
       let t = 0.5;
@@ -30,7 +33,9 @@ Vue.createApp({
           investment: this.investment,
         });
 
+      this.createChart();
     },
+
     reset() {
       this.runs = [];
       this.results = [];
@@ -39,59 +44,58 @@ Vue.createApp({
       this.losers = 0;
       this.bank = 0;
     },
+
     run() {
       for (let i = 0; i < this.repeat; i++) {
         this.sim();
       }
-    }
-  },
-  mounted() {
-    console.log(this.roi);
-    var ctx = document.getElementById('myChart');
-    var myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: [
-          'Sunday',
-          'Monday',
-          'Tuesday',
-          'Wednesday',
-          'Thursday',
-          'Friday',
-          'Saturday'
-        ],
-        datasets: [{
-          data: [
-            this.winners,
-            21345,
-            18483,
-            24003,
-            23489,
-            24092,
-            12034
+    },
+
+    createChart() {
+      var ctx = document.getElementById('myChart');
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: [
+            'Sunday',
+            'Monday'
           ],
-          lineTension: 0,
-          backgroundColor: 'transparent',
-          borderColor: '#007bff',
-          borderWidth: 4,
-          pointBackgroundColor: '#007bff'
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false
-            }
+          datasets: [{
+            data: [
+              this.winners,
+              2
+            ],
+            lineTension: 0,
+            backgroundColor: 'transparent',
+            borderColor: '#007bff',
+            borderWidth: 4,
+            pointBackgroundColor: '#007bff'
           }]
         },
-        legend: {
-          display: false
+        options: {
+          animation: {
+            duration: 0
+          },
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: false
+              }
+            }]
+          },
+          legend: {
+            display: false
+          }
         }
-      }
-    });
+      });
+    }
 
+  },
+
+  mounted() {
+    this.createChart();    
   }
+
 }).mount("#app");
 
 
