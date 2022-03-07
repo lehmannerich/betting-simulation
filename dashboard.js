@@ -23,7 +23,6 @@ Vue.createApp({
   methods: {
 
     sim() {
-
       let t = 0.5;
       var r = Math.random();
       if (r > t) { this.results.push({result: true}); this.winners++; this.bank = this.bank + this.roi}
@@ -34,10 +33,8 @@ Vue.createApp({
           investment: this.investment,
         });
 
-      myChart.data.labels.push("LAB");
-      myChart.data.datasets.forEach((dataset) => {
-          dataset.data.push(1);
-      });
+      myChart.data.labels.push(id-1);
+      myChart.data.datasets[0].data.push(this.bank);
       myChart.update();
     },
 
@@ -48,6 +45,9 @@ Vue.createApp({
       this.winners = 0;
       this.losers = 0;
       this.bank = 0;
+      myChart.data.labels = [];
+      myChart.data.datasets[0].data = [];
+      myChart.update();
     },
 
     run() {
@@ -55,9 +55,6 @@ Vue.createApp({
         this.sim();
       }
     },
-
-    createChart() {
-    }
 
   },
 
@@ -76,13 +73,10 @@ Vue.createApp({
           }]
         },
         options: {
-          // animation: {
-          //   duration: 0
-          // },
           scales: {
             yAxes: [{
               ticks: {
-                beginAtZero: false
+                beginAtZero: true
               }
             }]
           },
