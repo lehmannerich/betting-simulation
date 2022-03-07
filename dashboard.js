@@ -2,6 +2,7 @@
 
 
 let id = 1;
+var myChart;
 
 Vue.createApp({
 
@@ -33,7 +34,11 @@ Vue.createApp({
           investment: this.investment,
         });
 
-      this.createChart();
+      myChart.data.labels.push("LAB");
+      myChart.data.datasets.forEach((dataset) => {
+          dataset.data.push(1);
+      });
+      myChart.update();
     },
 
     reset() {
@@ -51,25 +56,18 @@ Vue.createApp({
       }
     },
 
-    //I will try to split this in two.
-    //I will put the variable outside the Vue App.
-    //I will put the chart creation into mounted or leave it here, but I'll remove the data.
-    //Then I will trigger the chart.update function to make updates to the charts data.
-
     createChart() {
-      var ctx = document.getElementById('myChart');
-      var myChart = new Chart(ctx, {
+    }
+
+  },
+
+  mounted() {
+    myChart = new Chart(document.getElementById('myChart'), {
         type: 'line',
         data: {
-          labels: [
-            'Sunday',
-            'Monday'
-          ],
+          labels: [],
           datasets: [{
-            data: [
-              this.winners,
-              2
-            ],
+            data: [],
             lineTension: 0,
             backgroundColor: 'transparent',
             borderColor: '#007bff',
@@ -78,9 +76,9 @@ Vue.createApp({
           }]
         },
         options: {
-          animation: {
-            duration: 0
-          },
+          // animation: {
+          //   duration: 0
+          // },
           scales: {
             yAxes: [{
               ticks: {
@@ -92,21 +90,10 @@ Vue.createApp({
             display: false
           }
         }
-      });
-    }
-
-  },
-
-  mounted() {
-    this.createChart();    
+      }); 
   }
 
 }).mount("#app");
-
-
-
-
-
 
 
 
