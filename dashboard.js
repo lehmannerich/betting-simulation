@@ -4,6 +4,7 @@
 let id = 1;
 var myChart;
 
+
 Vue.createApp({
 
   data() {
@@ -36,9 +37,16 @@ Vue.createApp({
       myChart.data.labels.push(id-1);
       myChart.data.datasets[0].data.push(this.bank);
       myChart.update();
+
     },
 
     reset() {
+      const highestTimeoutId = window.setTimeout(() => {
+        for (let i = highestTimeoutId; i >= 0; i--) {
+          window.clearInterval(i);
+        }
+      }, 0);
+
       this.runs = [];
       this.results = [];
       id = 1;
@@ -48,11 +56,14 @@ Vue.createApp({
       myChart.data.labels = [];
       myChart.data.datasets[0].data = [];
       myChart.update();
+      
     },
 
     run() {
       for (let i = 0; i < this.repeat; i++) {
-        this.sim();
+        setTimeout( () => { 
+          this.sim();
+        }, 500 * i );
       }
     },
 
