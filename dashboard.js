@@ -13,7 +13,7 @@ Vue.createApp({
       results: [],
       investment: 10000,
       roi: 100000,
-      repeat: 1,
+      repeat: 10,
 
       winners: 0,
       losers: 0,
@@ -41,12 +41,7 @@ Vue.createApp({
     },
 
     reset() {
-      const highestTimeoutId = window.setTimeout(() => {
-        for (let i = highestTimeoutId; i >= 0; i--) {
-          window.clearInterval(i);
-        }
-      }, 0);
-
+      this.stop();
       this.runs = [];
       this.results = [];
       id = 1;
@@ -56,16 +51,23 @@ Vue.createApp({
       myChart.data.labels = [];
       myChart.data.datasets[0].data = [];
       myChart.update();
-      
+
     },
 
     run() {
       for (let i = 0; i < this.repeat; i++) {
         setTimeout( () => { 
           this.sim();
-        }, 500 * i );
+        }, 100 * i );
       }
     },
+    stop() {
+      const highestTimeoutId = window.setTimeout(() => {
+        for (let i = highestTimeoutId; i >= 0; i--) {
+          window.clearInterval(i);
+        }
+      }, 0);
+    }
 
   },
 
