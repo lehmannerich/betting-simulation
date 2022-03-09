@@ -50,15 +50,15 @@
               <div class="card mb-3">
                 <div class="card-body">
                   <div class="mb-3">
-                    <label class="form-label"># of startups</label>
+                    <label class="form-label">From # of investments</label>
                     <input v-model="total" type="text" class="form-control">
                   </div>                  
                   <div class="mb-3">
-                    <label class="form-label"># winners</label>
+                    <label class="form-label"># are winners</label>
                     <input v-model="winnersfromtotal" type="text" class="form-control">
                   </div>
-                  <p>Losers: </p>
-                  <p>Chance of success: </p>
+                  <p>Losers: {{losersfromtotal}}</p>
+                  <p>Chance of success: {{chance}} </p>
                 </div>
               </div>
 
