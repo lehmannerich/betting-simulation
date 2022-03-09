@@ -107,7 +107,7 @@ Vue.createApp({
       for (let i = 0; i < this.repeat; i++) {
         setTimeout( () => { 
           this.sim();
-        }, 50 * i );
+        }, 10 * i );
       }
     },
 
