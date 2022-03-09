@@ -33,15 +33,48 @@
           <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
             <div class="position-sticky pt-3">
 
-              <div class="mb-3">
-                <label class="form-label">Investment</label>
-                <input v-model="investment" type="text" class="form-control">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="mb-3">
+                    <label class="form-label">Valuation at buy</label>
+                    <input v-model="buyat" type="text" class="form-control">
+                  </div>                  
+                  <div class="mb-3">
+                    <label class="form-label">Valuation at sell</label>
+                    <input v-model="sellat" type="text" class="form-control">
+                  </div>
+                  <p>Payoff: {{roi}} X</p>
+                </div>
               </div>
 
-              <div class="mb-3">
-                <label class="form-label">Repeat</label>
-                <input v-model="repeat" type="text" class="form-control">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="mb-3">
+                    <label class="form-label"># of startups</label>
+                    <input v-model="total" type="text" class="form-control">
+                  </div>                  
+                  <div class="mb-3">
+                    <label class="form-label"># winners</label>
+                    <input v-model="winnersfromtotal" type="text" class="form-control">
+                  </div>
+                  <p>Losers: </p>
+                  <p>Chance of success: </p>
+                </div>
               </div>
+
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="mb-3">
+                    <label class="form-label">Investment per Bet</label>
+                    <input v-model="investment" type="text" class="form-control">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Repeat</label>
+                    <input v-model="repeat" type="text" class="form-control">
+                  </div>                  
+                </div>
+              </div>
+              
               <p>
                 <a href="#" class="btn btn-primary my-2 btn-block" @click="run">Simulate</a>
                 <a href="#" class="btn btn-dark my-2 btn-block" @click="stop">Stop</a>

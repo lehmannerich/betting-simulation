@@ -11,8 +11,13 @@ Vue.createApp({
     return {
       runs: [],
       results: [],
+      buyat: 15,
+      sellat: 1000,
+
+      total: 10,
+      winnersfromtotal: 1,
+
       investment: 10000,
-      roi: 100000,
       repeat: 10,
 
       winners: 0,
@@ -21,12 +26,21 @@ Vue.createApp({
     };
   },
 
+  computed: {
+    roi: {
+      get() {
+        return Math.round(this.sellat / this.buyat)
+      }
+    },
+    
+  },
+
   methods: {
 
     sim() {
       let t = 0.5;
       var r = Math.random();
-      if (r > t) { this.results.push({result: true}); this.winners++; this.bank = this.bank + this.roi}
+      if (r > t) { this.results.push({result: true}); this.winners++; this.bank = this.bank + this.roi * this.investment}
       else { this.results.push({result: false}); this.losers++; this.bank = this.bank - this.investment}
       
       this.runs.push(
@@ -58,7 +72,7 @@ Vue.createApp({
       for (let i = 0; i < this.repeat; i++) {
         setTimeout( () => { 
           this.sim();
-        }, 100 * i );
+        }, 200 * i );
       }
     },
     stop() {
