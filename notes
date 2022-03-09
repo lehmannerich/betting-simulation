@@ -1,0 +1,10 @@
+
+
+performace = 
+	earned (winners * investment * roi)
+	/ 
+	invested (runs * investment)
+
+
+
+bank = earned - invested

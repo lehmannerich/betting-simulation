@@ -1,0 +1,28 @@
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-style: normal;
+  background: #F4F7FD;
+  color: #272830;
+}
+
+.card {
+    border: 1px solid #F6F4FE;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.metric {
+  text-align: center;
+}
+
+.metric h2 {
+  font-weight: 900;
+  font-size: 48px;
+}
+
+.metric h6 {
+  font-weight: normal;
+  font-size: 12px;
+  color: #57575F;
+}

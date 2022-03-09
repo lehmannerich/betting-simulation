@@ -9,8 +9,6 @@ Vue.createApp({
 
   data() {
     return {
-      runs: [],
-      results: [],
       buyat: 15,
       sellat: 1000,
 
@@ -18,7 +16,10 @@ Vue.createApp({
       winnersfromtotal: 10,
 
       investment: 10000,
-      repeat: 100,
+      repeat: 1,
+
+      runs: [],
+      results: [],
 
       winners: 0,
       losers: 0,
@@ -42,6 +43,21 @@ Vue.createApp({
         return (this.winnersfromtotal / this.total).toPrecision(4);
       }
     },
+    earned: {
+      get() {
+        return (this.winners * this.investment * this.roi);
+      }
+    },    
+    invested: {
+      get() {
+        return (this.winners + this.losers) * this.investment;
+      },
+    },
+    performance: {
+      get() {
+        return (this.bank / this.invested * 100).toPrecision(4);
+      }
+    }
   },
 
   methods: {
@@ -49,8 +65,18 @@ Vue.createApp({
     sim() {
       let t = this.chance;
       var r = Math.random();
-      if (r < t) { this.results.push({result: true}); this.winners++; this.bank = this.bank + this.roi * this.investment}
-      else { this.results.push({result: false}); this.losers++; this.bank = this.bank - this.investment}
+
+      if (r < t) { 
+        this.results.push({result: true}); 
+        this.winners++; 
+        this.bank = this.bank + this.roi * this.investment
+      }
+
+      else { 
+        this.results.push({result: false}); 
+        this.losers++; 
+        this.bank = this.bank - this.investment
+      }
       
       this.runs.push(
         { id: id++,
