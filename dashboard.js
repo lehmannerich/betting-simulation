@@ -110,12 +110,23 @@ Vue.createApp({
         }, 50 * i );
       }
     },
+
     stop() {
       const highestTimeoutId = window.setTimeout(() => {
         for (let i = highestTimeoutId; i >= 0; i--) {
           window.clearInterval(i);
         }
       }, 0);
+    },
+
+    toCurrency(value) {
+      var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 0
+      });
+
+      return formatter.format(value);
     }
 
   },
