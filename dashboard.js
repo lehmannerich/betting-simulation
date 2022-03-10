@@ -14,15 +14,17 @@ Vue.createApp({
 
       total: 531,
       winnersfromtotal: 10,
+      returnersfromtotal: 100,
 
       investment: 10000,
-      repeat: 1,
+      repeat: 10,
 
       runs: [],
       results: [],
 
       winners: 0,
       losers: 0,
+      returners: 0,
       bank: 0
     };
   },
@@ -35,17 +37,27 @@ Vue.createApp({
     },    
     losersfromtotal: {
       get() {
-        return this.total - this.winnersfromtotal;
+        return this.total - this.winnersfromtotal - this.returnersfromtotal;
       }
     },    
-    chance: {
+    chancewin: {
       get() {
         return (this.winnersfromtotal / this.total).toPrecision(4);
+      }
+    },    
+    chancereturn: {
+      get() {
+        return (this.returnersfromtotal / this.total).toPrecision(4);
+      }
+    },
+    returned: {
+      get() {
+        return this.returners * this.investment;
       }
     },
     earned: {
       get() {
-        return (this.winners * this.investment * this.roi);
+        return (this.winners * this.investment * this.roi) + (this.returned);
       }
     },    
     invested: {
@@ -63,15 +75,18 @@ Vue.createApp({
   methods: {
 
     sim() {
-      let t = this.chance;
+      let twin = this.chancewin;
+      let treturn = this.chancereturn;
       var r = Math.random();
 
-      if (r < t) { 
+      if (r < twin) { 
         this.results.push({result: true}); 
         this.winners++; 
-        this.bank = this.bank + this.roi * this.investment
+        this.bank = this.bank + this.roi * this.investment - this.investment;
       }
-
+      else if (r < treturn) {
+        console.log("We have a returner")
+      }
       else { 
         this.results.push({result: false}); 
         this.losers++; 
@@ -107,7 +122,7 @@ Vue.createApp({
       for (let i = 0; i < this.repeat; i++) {
         setTimeout( () => { 
           this.sim();
-        }, 10 * i );
+        }, 100 * i );
       }
     },
 
