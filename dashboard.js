@@ -20,7 +20,6 @@ Vue.createApp({
       repeat: 10,
 
       runs: [],
-      results: [],
 
       winners: 0,
       losers: 0,
@@ -62,12 +61,12 @@ Vue.createApp({
     },    
     invested: {
       get() {
-        return (this.winners + this.losers) * this.investment;
+        return (this.winners + this.losers + this.returners) * this.investment;
       },
     },
     performance: {
       get() {
-        return (this.bank / this.invested * 100).toPrecision(4);
+        return (this.bank / this.invested * 100 ).toPrecision(4);
       }
     }
   },
@@ -80,15 +79,13 @@ Vue.createApp({
       var r = Math.random();
 
       if (r < twin) { 
-        this.results.push({result: true}); 
         this.winners++; 
         this.bank = this.bank + this.roi * this.investment - this.investment;
       }
       else if (r < treturn) {
-        console.log("We have a returner")
+        this.returners++;
       }
       else { 
-        this.results.push({result: false}); 
         this.losers++; 
         this.bank = this.bank - this.investment
       }
@@ -120,9 +117,12 @@ Vue.createApp({
 
     run() {
       for (let i = 0; i < this.repeat; i++) {
-        setTimeout( () => { 
-          this.sim();
-        }, 100 * i );
+        this.sim();
+
+    //    setTimeout( () => { 
+    //      this.sim();
+    //    }, 100 * i );
+
       }
     },
 
