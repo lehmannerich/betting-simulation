@@ -39,59 +39,79 @@
 
               <div class="card mb-3">
                 <div class="card-body">
-                  <div class="mb-3">
-                    <label class="form-label">Valuation at buy</label>
+                  <div class="mb-3 d-flex">
+                    <label class="form-label w-100">Valuation at sell</label>
+                    <input v-model="sellat" type="text" class="form-control">
+                  </div>                  
+                  <div class="mb-3 d-flex">
+                    <label class="form-label w-100">Valuation at buy</label>
                     <input v-model="buyat" type="text" class="form-control">
                   </div>                  
-                  <div class="mb-3">
-                    <label class="form-label">Valuation at sell</label>
-                    <input v-model="sellat" type="text" class="form-control">
+                  <div class="mb-3 d-flex">
+                    <label class="form-label w-100">Payout</label>
+                    <h3>{{roi}}X</h3>
                   </div>
-                  <p>Payoff: {{roi}} X</p>
                 </div>
               </div>
 
               <div class="card mb-3">
                 <div class="card-body">
-                  <div class="mb-3">
-                    <label class="form-label">From # of investments</label>
-                    <input v-model="total" type="text" class="form-control">
-                  </div>                  
-                  <div class="mb-3">
-                    <label class="form-label"># are winners</label>
+                  <div class="mb-3 d-flex">
+                    <label class="form-label w-100">Winners</label>
                     <input v-model="winnersfromtotal" type="text" class="form-control">
-                  </div>                  
-                  <div class="mb-3">
-                    <label class="form-label"># are returners</label>
+                  </div>                                
+                  <div class="mb-3 d-flex">
+                    <label class="form-label w-100">Returners</label>
                     <input v-model="returnersfromtotal" type="text" class="form-control">
                   </div>
-                  <p>Losers: {{losersfromtotal}}</p>
-                  <p>Chance of win: {{chancewin}}</p>
-                  <p>Chance of return: {{chancereturn}}</p>
-                  <p>Expected performace: {{chancewin * roi}}</p>
+                  <div class="mb-3 d-flex">
+                    <label class="form-label w-100">Total</label>
+                    <input v-model="total" type="text" class="form-control">
+                  </div>    
+                  <div class="mb-3 d-flex">
+                    <label class="form-label w-100">Chance of success</label>
+                    <h3>{{chancewin}}%</h3>
+                  </div>
                 </div>
               </div>
 
               <div class="card mb-3">
                 <div class="card-body">
-                  <div class="mb-3">
-                    <label class="form-label">Investment per Bet</label>
+                  <div class="mb-3 d-flex">
+                    <label class="form-label w-100">Expected Performance</label>
+                    <h3>{{(roi*chancewin/100-1)*100}}%</h3>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card mb-3 simulator-card">
+                <div class="card-body">
+                  <div class="mb-3 d-flex">
+                    <label class="form-label w-100">Investment per bet</label>
                     <input v-model="investment" type="text" class="form-control">
                   </div>
-                  <div class="mb-3">
-                    <label class="form-label">Repeat</label>
+                  <div class="mb-3 d-flex">
+                    <label class="form-label w-100">Repeat</label>
                     <input v-model="repeat" type="text" class="form-control">
                   </div>                  
                 </div>
               </div>
-              
+
               <p>
-                <a href="#" class="btn btn-primary my-2 btn-block" @click="run">Simulate</a>
-                <a href="#" class="btn btn-dark my-2 btn-block" @click="stop">Stop</a>
-                <a href="#" class="btn btn-secondary my-2 btn-block" @click="reset">Reset</a>
+                <a class="btn btn-primary my-2 btn-block" @click="run">Simulate</a>
+                <a class="btn btn-dark my-2 btn-block" @click="stop">Stop</a>
+                <a class="btn btn-secondary my-2 btn-block" @click="reset">Reset</a>
               </p>
 
             </div>
+
+            <p class="mt-5">Templates</p>
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-dark" @click="yc">YC</a>
+              <a href="#" class="list-group-item list-group-item-dark" @click="cointoss">Coin Toss</a>
+              <a href="#" class="list-group-item list-group-item-dark" @click="sanitycheck">Sanity Check</a>
+            </div>
+
           </nav>
 
           <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">

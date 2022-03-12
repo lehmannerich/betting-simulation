@@ -9,12 +9,12 @@ Vue.createApp({
 
   data() {
     return {
-      buyat: 15,
       sellat: 1000,
+      buyat: 15,
 
-      total: 531,
       winnersfromtotal: 10,
       returnersfromtotal: 100,
+      total: 531,
 
       investment: 10000,
       repeat: 10,
@@ -41,7 +41,7 @@ Vue.createApp({
     },    
     chancewin: {
       get() {
-        return (this.winnersfromtotal / this.total).toPrecision(4);
+        return (this.winnersfromtotal / (this.total - this.returnersfromtotal) * 100).toPrecision(4);
       }
     },    
     chancereturn: {
@@ -74,7 +74,7 @@ Vue.createApp({
   methods: {
 
     sim() {
-      let twin = this.chancewin;
+      let twin = this.chancewin / 100;
       let treturn = this.chancereturn;
       var r = Math.random();
 
@@ -108,6 +108,7 @@ Vue.createApp({
       id = 1;
       this.winners = 0;
       this.losers = 0;
+      this.returners = 0;
       this.bank = 0;
       myChart.data.labels = [];
       myChart.data.datasets[0].data = [];
@@ -115,13 +116,40 @@ Vue.createApp({
 
     },
 
+    sanitycheck() {
+      this.sellat = 10;
+      this.buyat = 1;
+      this.winnersfromtotal = 1;
+      this.returnersfromtotal = 0;
+      this.total = 10;
+      this.investment = 10;
+    },
+
+    cointoss() {
+      this.sellat = 2;
+      this.buyat = 1;
+      this.winnersfromtotal = 50;
+      this.returnersfromtotal = 0;
+      this.total = 100;
+      this.investment = 10;
+    },
+
+    yc() {
+      this.sellat = 1000000000;
+      this.buyat = 15000000;
+      this.winnersfromtotal = 10;
+      this.returnersfromtotal = 100;
+      this.total = 531;
+      this.investment = 50000;
+    },
+
     run() {
       for (let i = 0; i < this.repeat; i++) {
-        this.sim();
+    //    this.sim();
 
-    //    setTimeout( () => { 
-    //      this.sim();
-    //    }, 100 * i );
+        setTimeout( () => { 
+          this.sim();
+        }, 100 * i );
 
       }
     },

@@ -11,6 +11,10 @@ body {
     border-radius: 8px;
 }
 
+.card input {
+  max-width: 128px;
+}
+
 .metric {
   text-align: center;
 }
@@ -29,7 +33,7 @@ body {
 
 /*
  * Dark Theme
-
+ */
 
 
 body {
@@ -38,7 +42,7 @@ body {
 }
 
 .sidebar {
-  background: #000 !important;
+  background: #0b0b0b !important;
 }
 
 .metric h6 {
@@ -50,4 +54,12 @@ body {
   border-color: #212121;
 }
 
- */
+/*
+.simulator-card {
+  background: #031633;
+}
+*/
+
+.navbar {
+  background: #0b0b0b !important;
+}
