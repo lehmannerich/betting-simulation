@@ -10,14 +10,14 @@ Vue.createApp({
   data() {
     return {
       sellat: 1000,
-      buyat: 15,
+      buyat: 1.5,
 
       winnersfromtotal: 10,
       returnersfromtotal: 100,
       total: 531,
 
-      investment: 10000,
-      repeat: 10,
+      investment: 7000,
+      repeat: 100,
 
       runs: [],
 
@@ -123,6 +123,7 @@ Vue.createApp({
       this.returnersfromtotal = 0;
       this.total = 10;
       this.investment = 10;
+      this.reset();
     },
 
     cointoss() {
@@ -132,15 +133,27 @@ Vue.createApp({
       this.returnersfromtotal = 0;
       this.total = 100;
       this.investment = 10;
+      this.reset();
     },
 
     yc() {
-      this.sellat = 1000000000;
-      this.buyat = 15000000;
+      this.sellat = 1000;
+      this.buyat = 1.5;
       this.winnersfromtotal = 10;
       this.returnersfromtotal = 100;
       this.total = 531;
-      this.investment = 50000;
+      this.investment = 7000;
+      this.reset();
+    },
+
+    afteryc() {
+      this.sellat = 1000;
+      this.buyat = 15;
+      this.winnersfromtotal = 10;
+      this.returnersfromtotal = 100;
+      this.total = 531;
+      this.investment = 10000;
+      this.reset();
     },
 
     run() {
@@ -149,7 +162,7 @@ Vue.createApp({
 
         setTimeout( () => { 
           this.sim();
-        }, 100 * i );
+        }, 150 * i );
 
       }
     },

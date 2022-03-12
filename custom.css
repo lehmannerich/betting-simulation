@@ -49,9 +49,10 @@ body {
   color: #B6C0C9;
 }
 
-.card {
+.card, .list-group .list-group-item {
   background: #1C1C1C;
   border-color: #212121;
+  color: #fff;
 }
 
 /*
@@ -63,3 +64,4 @@ body {
 .navbar {
   background: #0b0b0b !important;
 }
+
